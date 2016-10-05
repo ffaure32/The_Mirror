@@ -18,7 +18,7 @@ export class MessageComponent implements OnInit{
 
   constructor() {
     this.texte_1 = "Bonjour";
-    this.texte_2 = "Aurélien";
+    this.texte_2 = "Bdx.io";
   }
 
   ngOnInit(){

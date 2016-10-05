@@ -10,7 +10,7 @@ export class WeatherService {
   public key : String = "macle";
   public key_url : String;
   public requestUrl : String;
-  public params : String = "&q=Lomme,Fr&units=metric";
+  public params : String = "&q=Talence,Fr&units=metric&lang=fr";
   public http : any;
   public apikeyService : any;
 
