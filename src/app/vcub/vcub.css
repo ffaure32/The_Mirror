@@ -1,0 +1,12 @@
+vcub {
+  position: absolute;
+  right: 60px;
+  top: 60px;
+  text-align: right; }
+  vcub h1 {
+    margin-bottom: 10px; }
+  vcub .item {
+    margin-bottom: 10px; }
+    vcub .item h2 {
+      color: #ea5829;
+      font-weight: 300; }
