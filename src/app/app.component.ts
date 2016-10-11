@@ -5,7 +5,7 @@ import {WeatherComponent} from './weather/weather.component';
 import {WeatherIconComponent} from './weather_icon/weather_icon.component';
 import {ClockComponent} from './clock/clock.component';
 import {CarComponent} from './car/car.component';
-import {VlilleComponent} from './vlille/vlille.component';
+import {VcubComponent} from './vcub/vcub.component';
 import {DateTimeComponent} from './datetime/datetime.component';
 import {MessageComponent} from './message/message.component';
 import {HomeComponent} from './home/home.component';
@@ -24,7 +24,7 @@ import {ApikeyService} from './apikey/apikey.service';
       WeatherIconComponent,
       CarComponent,
       DateTimeComponent,
-      VlilleComponent,
+      VcubComponent,
       MessageComponent,
       HomeComponent,
       SocialComponent
