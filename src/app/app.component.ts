@@ -9,7 +9,7 @@ import {VcubComponent} from './vcub/vcub.component';
 import {DateTimeComponent} from './datetime/datetime.component';
 import {MessageComponent} from './message/message.component';
 import {HomeComponent} from './home/home.component';
-import {SocialComponent} from './social/social.component';
+import {TweetlineComponent} from './tweetline/tweetline.component';
 
 import {ApikeyService} from './apikey/apikey.service';
 
@@ -27,7 +27,7 @@ import {ApikeyService} from './apikey/apikey.service';
       VcubComponent,
       MessageComponent,
       HomeComponent,
-      SocialComponent
+      TweetlineComponent
     ],
     providers: [ApikeyService]
 })
