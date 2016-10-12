@@ -1,4 +1,4 @@
-car{
+traffic{
   position: fixed;
   left: 60px;
   bottom: 60px;
@@ -28,6 +28,7 @@ car{
     position: relative;
     overflow: hidden;
     margin-left: -40px;
+    opacity: 0.6;
   }
 
   .map_overlay{

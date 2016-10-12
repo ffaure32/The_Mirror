@@ -4,7 +4,7 @@ import {ViewEncapsulation} from '@angular/core';
 import {WeatherComponent} from './weather/weather.component';
 import {WeatherIconComponent} from './weather_icon/weather_icon.component';
 import {ClockComponent} from './clock/clock.component';
-import {CarComponent} from './car/car.component';
+import {TrafficComponent} from './traffic/traffic.component';
 import {VcubComponent} from './vcub/vcub.component';
 import {DateTimeComponent} from './datetime/datetime.component';
 import {MessageComponent} from './message/message.component';
@@ -22,7 +22,7 @@ import {ApikeyService} from './apikey/apikey.service';
       WeatherComponent,
       ClockComponent,
       WeatherIconComponent,
-      CarComponent,
+      TrafficComponent,
       DateTimeComponent,
       VcubComponent,
       MessageComponent,
