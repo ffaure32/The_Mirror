@@ -26,8 +26,8 @@ export class TrafficComponent implements OnInit{
   public styles:any;
 
   constructor(public elementRef:ElementRef,private trafficService : TrafficService, private apikeyService : ApikeyService) {
-    this.latMapCenter = 44.8404400;
-    this.lngMapCenter = -0.5805000;
+    this.latMapCenter = 44.834741;
+    this.lngMapCenter = -0.588890;
     this.latMarker = 44.807260;
     this.lngMarker = -0.605569;
     this.zoom = 10;
