@@ -55,7 +55,7 @@ export class TrafficComponent implements OnInit{
   ngOnInit(){
     var mapProp = {
             center: new google.maps.LatLng(this.latMapCenter, this.lngMapCenter),
-            zoom: 11,
+            zoom: this.zoom,
             disableZoom: true,
             disableDefaultUI: true,
             //libraries: "places",
