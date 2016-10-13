@@ -1,15 +1,19 @@
 declare var Pusher: any;
 
-import {Component, Input, AfterViewChecked, OnInit, OnChanges, OnDestroy} from '@angular/core';
+import {Component, Input, AfterViewChecked, OnInit, OnChanges, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {Observable}       from 'rxjs/Rx';
 import {TweetlineService} from './tweetline.service';
 
 
 @Component({
   selector: 'tweetline',
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './app/tweetline/tweetline.html',
+  styleUrls: ["./app/tweetline/tweetline.css"],
   providers: [TweetlineService]
 })
+
+
 export class TweetlineComponent implements OnInit {
   public tweets: any[] = [];
   private hashtag: string = "#bdxio";

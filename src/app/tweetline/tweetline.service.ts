@@ -41,7 +41,7 @@ export class TweetlineService {
     var encsearchquery = encodeURIComponent("#bdxio");
     var bearerheader = 'Bearer ' + token.access_token;
     return this.http.get(this.api_url + this.search_url + encsearchquery +
-      '&result_type=recent', { headers: { Authorization: bearerheader } })
+      '&result_type=recent&count=2', { headers: { Authorization: bearerheader } })
       .map(
       function (res) {
         console.log("res:" + res);

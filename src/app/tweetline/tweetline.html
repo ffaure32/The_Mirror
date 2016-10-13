@@ -1,15 +1,11 @@
 <h1>bdx.io on twitter</h1>
 
-<div *ngFor="let item of tweets" class="col s12 m7">
-  <div class="card">
-    <div class="card-image">
-      <img style={width:10px,height:10px;} src={{item.user.profile_image_url}}>
-    </div>
-    <div class="right-content">
-      <span class="card-title">{{item.user.name}}</span>
-      <div class="card-content">
-        <p>{{item.text}}</p>
-      </div>
-    </div>
+<div *ngFor="let item of tweets" class="tweet">
+  <div class="user">
+    <img class="user-pic" src={{item.user.profile_image_url}}>
+    <span class="user-name">{{item.user.name}}</span>
   </div>
+    <div class="tweet-content">
+      <p>{{item.text}}</p>
+    </div>
 </div>

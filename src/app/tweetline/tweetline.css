@@ -1,7 +1,16 @@
 tweetline {
-  position: absolute;
+  position: fixed;
   right: 60px;
-  top: 320px;
+  bottom: 60px;
+  max-width: 300;
+  max-height: 200;
   text-align: right; }
   tweetline h1 {
     margin-bottom: 20px; }
+  tweetline .tweet {
+    margin-bottom: 10px; }
+    tweetline .tweet img {
+      width: 15px; }
+    tweetline .tweet h2 {
+      color: #ea5829;
+      font-weight: 300; }
