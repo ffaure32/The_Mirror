@@ -13,10 +13,10 @@ export class TweetlineService {
 
   public consumerkey: any;
   public consumersecret: any;
-  public apikeyService : any;
+  public apikeyService: any;
 
-  public token : any;
-  constructor(http: Http, apikeyService:ApikeyService) {
+  public token: any;
+  constructor(http: Http, apikeyService: ApikeyService) {
     this.http = http;
     this.apikeyService = apikeyService;
     this.consumerkey = this.apikeyService.getKey('twitter');
@@ -27,26 +27,30 @@ export class TweetlineService {
   getAuthorization() {
     let options = this.getTokenRequestOptions();
     let body = 'grant_type=client_credentials';
-    var result = this.http.post(this.api_url + this.oauth_url, body, options)
+    return this.http.post(this.api_url + this.oauth_url, body, options)
       .map(
-        function(res){
-          this.token = res.json().access_token;
-          console.log("result1:"+this.token); 
-          return res.json();
-        }
+      function (res) {
+        this.token = res.json().access_token;
+        return res.json();
+      }
       )
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
-      .subscribe(); //...errors if any
-      console.log("result2:"+this.token);
-      return this.token;
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  getTweets(token : any) {
-        var encsearchquery = encodeURIComponent("#bdxio");
-        var bearerheader = 'Bearer ' + token;
-        this.http.get(this.api_url + this.search_url + encsearchquery +
-         '&result_type=recent', {headers: {Authorization: bearerheader}})
-        .map(res => res.json());
+  getTweets(token: any) {
+    var encsearchquery = encodeURIComponent("#bdxio");
+    var bearerheader = 'Bearer ' + token.access_token;
+    return this.http.get(this.api_url + this.search_url + encsearchquery +
+      '&result_type=recent', { headers: { Authorization: bearerheader } })
+      .map(
+      function (res) {
+        console.log("res:" + res);
+        console.log("res:json" + res.json());
+        console.log("res:json:statuses" + res.json().statuses);
+        return res.json().statuses;
+      })
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+;
   }
 
   private getTokenRequestOptions() {

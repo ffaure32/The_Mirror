@@ -1,41 +1,46 @@
 declare var Pusher: any;
 
-import {
-  Component,
-  Input,
-  AfterViewChecked,
-  OnInit,
-  OnChanges,
-  OnDestroy
-} from '@angular/core';
-
+import {Component, Input, AfterViewChecked, OnInit, OnChanges, OnDestroy} from '@angular/core';
+import {Observable}       from 'rxjs/Rx';
 import {TweetlineService} from './tweetline.service';
 
 
 @Component({
   selector: 'tweetline',
   templateUrl: './app/tweetline/tweetline.html',
-  providers : [TweetlineService]
+  providers: [TweetlineService]
 })
 export class TweetlineComponent implements OnInit {
-  public tweets : any;
+  public tweets: any[] = [];
   private hashtag: string = "#bdxio";
   private className: String;
-  private tweetlineService : TweetlineService;
-  private token : any;
+  private tweetlineService: TweetlineService;
+  private token: any;
 
-  constructor(tweetlineService : TweetlineService) {
-    console.log("on init bien le composant tweet line");
-    this.tweets = [];
+  constructor(tweetlineService: TweetlineService) {
     this.tweetlineService = tweetlineService;
   }
 
 
   public ngOnInit() {
-    console.log("on recupere le token");
-    this.token = this.tweetlineService.getAuthorization();
-    console.log("token body:"+this.token);
-    this.tweets = this.tweetlineService.getTweets(this.token);
-    console.log("tweets :"+this.tweets);
+    console.log('Init tweetline');
+    Observable
+      .from(this.tweetlineService.getAuthorization())
+      .subscribe((o: any) => {
+        this.token = o;
+        this.getTweets(this.token);
+      });
+  }
+
+  private getTweets(jsonResponse: any) {
+    Observable
+      .from(this.tweetlineService.getTweets(this.token))
+      .map((res: any) => res)
+      .flatMap((res: any) => res)
+      .subscribe((o: any) => {
+        console.log(o);
+        this.tweets.push(o);
+      });
+
   }
 }
