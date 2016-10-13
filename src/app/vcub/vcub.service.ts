@@ -1,17 +1,21 @@
 declare var X2JS: any;
 
 import {Injectable} from '@angular/core';
-import {Http,Headers,URLSearchParams,Jsonp} from '@angular/http';
+import {Http,Headers,URLSearchParams} from '@angular/http';
+import {ApikeyService} from './../apikey/apikey.service';
+
 
 @Injectable()
 export class VcubService {
   public api_url : String = "https://data.bordeaux-metropole.fr/wfs";
   public http : any;
-  public jsonp : any;
+  public apikeyService: any;
+  private metropoleKey: any;
 
-  constructor( jsonp : Jsonp, http : Http) {
+  constructor(http : Http,  apikeyService: ApikeyService) {
     this.http = http;
-    this.jsonp = jsonp;
+    this.apikeyService = apikeyService;
+    this.metropoleKey = this.apikeyService.getKey('metropole');
   }
 
   getBorneData(){
@@ -28,7 +32,7 @@ export class VcubService {
 
   getParams() {
         let params: URLSearchParams = new URLSearchParams();
-        params.set('key', "QHUHHRI7HD");
+        params.set('key', this.metropoleKey);
         params.set('PropertyName', "NOM,NBPLACES,NBVELOS,HEURE,TYPE");
         params.set('REQUEST', "GetFeature");
         params.set('SERVICE', "WFS");
