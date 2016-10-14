@@ -11,6 +11,7 @@ import {MessageComponent} from './message/message.component';
 import {HomeComponent} from './home/home.component';
 import {TweetlineComponent} from './tweetline/tweetline.component';
 
+import {ConstantsService} from './constants.service';
 import {ApikeyService} from './apikey/apikey.service';
 
 @Component({
@@ -29,7 +30,7 @@ import {ApikeyService} from './apikey/apikey.service';
       HomeComponent,
       TweetlineComponent
     ],
-    providers: [ApikeyService]
+    providers: [ApikeyService, ConstantsService]
 })
 
 export class AppComponent implements OnInit {

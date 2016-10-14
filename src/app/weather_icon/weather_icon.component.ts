@@ -4,13 +4,14 @@ import {Jsonp} from '@angular/http';
 
 import {WeatherService} from '../weather/weather.service';
 import {FirstLetterUpper} from '../pipes/firstletterupper.pipe';
+import {ConstantsService} from '../constants.service';
 
 @Component({
   selector: "weather-icon",
   templateUrl: "./app/weather_icon/weather_icon.html",
   encapsulation: ViewEncapsulation.None,
   styleUrls: ["./app/weather_icon/weather_icon.css"],
-  providers: [WeatherService],
+  providers: [WeatherService, ConstantsService],
   pipes: [FirstLetterUpper]
 })
 
@@ -21,7 +22,7 @@ export class WeatherIconComponent implements OnInit {
   public weather_object: any;
   public weather_temp: number = 0;
 
-  constructor(private weatherService: WeatherService) {
+  constructor(private weatherService: WeatherService, private constants : ConstantsService) {
     this.weather_types.push("sun-shower");
     this.weather_types.push("thunder-storm");
     this.weather_types.push("cloudy");
@@ -35,7 +36,7 @@ export class WeatherIconComponent implements OnInit {
     this.getCurrentWeather();
     setInterval(() => {
       this.getCurrentWeather();
-    }, 1800000);
+    }, this.constants.weather_refresh_interval);
 
   }
 

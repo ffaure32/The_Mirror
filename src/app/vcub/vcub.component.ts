@@ -5,6 +5,7 @@ import {XmlParsePipe} from '../pipes/xmlparse.pipe';
 import {VcubService} from './vcub.service';
 import {Observable}       from 'rxjs/Rx';
 import {Http, Headers, Jsonp} from '@angular/http';
+import {ConstantsService} from '../constants.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {Http, Headers, Jsonp} from '@angular/http';
   encapsulation: ViewEncapsulation.None,
   templateUrl: "./app/vcub/vcub.html",
   styleUrls: ["./app/vcub/vcub.css"],
-  providers: [VcubService],
+  providers: [VcubService, ConstantsService],
   pipes: [XmlParsePipe]
 })
 
@@ -21,7 +22,7 @@ export class VcubComponent implements OnInit {
   public stations: any[] = [];
   public http: Http;
 
-  constructor(private vcubservice: VcubService) {
+  constructor(private vcubservice: VcubService, private constants : ConstantsService) {
   }
 
   ngOnInit() {
@@ -56,7 +57,7 @@ export class VcubComponent implements OnInit {
 
   polling() {
     return Observable
-      .interval(60000)
+      .interval(this.constants.vcub_refresh_interval)
       .flatMap(() => {
         return this.getInfosStations();
       });
