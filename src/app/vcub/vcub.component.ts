@@ -27,22 +27,21 @@ export class VcubComponent implements OnInit {
   ngOnInit() {
     console.log('Init vcub');
     this.recupererEtatStationsInitiale();
-    this.recupererEtatStations();
+    this.recupererEtatStationsParIntervalle();
   }
 
   recupererEtatStationsInitiale() {
     Observable
-      .from(this.vcubservice.getBorneData())
+      .from(this.getBorneData())
       .flatMap(function (res: any) {
         return res;
-      }
-      )
-      .subscribe((o: any) => {
-        this.stations.push(o.CI_VCUB_P);      
+      })
+      .subscribe((infosStation: any) => {
+        this.ajoutNouvelleStation(infosStation);
       });
   }
 
-  recupererEtatStations() {
+  recupererEtatStationsParIntervalle() {
     Observable
       .from(this.polling())
       .flatMap(function (res: any) {
@@ -50,35 +49,36 @@ export class VcubComponent implements OnInit {
       }
       )
       .subscribe((o: any) => {
-        this.miseAJourStations(o);      
+        this.miseAJourStation(o);
       });
   }
 
-  miseAJourStations(infosStation : any) {
-        var trouve = false;
-
-        var station : any;
-        for (station of this.stations) {
-          if (station.NOM.__text == infosStation.CI_VCUB_P.NOM.__text) {
-            station.NBVELOS = infosStation.CI_VCUB_P.NBVELOS;
-            station.NBPLACES = infosStation.CI_VCUB_P.NBPLACES;
-            trouve = true;
-
-          }
-        }
-        if (!trouve) {
-          this.stations.push(infosStation.CI_VCUB_P);
-        }
+  miseAJourStation(infosStation: any) {
+    for (var station of this.stations) {
+      if (station.NOM.__text == infosStation.CI_VCUB_P.NOM.__text) {
+        this.miseAJourDonneesStation(station, infosStation);
+      }
+    }
   }
 
   polling() {
-    console.log("on demarre le polling");
     return Observable
       .interval(60000)
       .flatMap(() => {
-        console.log("on appelle la requete HTTP");
-        return this.vcubservice.getBorneData();
+        return this.getBorneData();
       });
+  }
 
+  ajoutNouvelleStation(station : any) {
+      this.stations.push(station.CI_VCUB_P);
+  }
+
+  miseAJourDonneesStation(station : any, nouvellesDonnees : any) {
+        station.NBVELOS = nouvellesDonnees.CI_VCUB_P.NBVELOS;
+        station.NBPLACES = nouvellesDonnees.CI_VCUB_P.NBPLACES;
+        
+  }
+  getBorneData() {
+    return this.vcubservice.getBorneData();
   }
 }
