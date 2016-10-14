@@ -32,10 +32,7 @@ export class VcubComponent implements OnInit {
 
   recupererEtatStationsInitiale() {
     Observable
-      .from(this.getBorneData())
-      .flatMap(function (res: any) {
-        return res;
-      })
+      .from(this.getInfosStations())
       .subscribe((infosStation: any) => {
         this.ajoutNouvelleStation(infosStation);
       });
@@ -44,10 +41,6 @@ export class VcubComponent implements OnInit {
   recupererEtatStationsParIntervalle() {
     Observable
       .from(this.polling())
-      .flatMap(function (res: any) {
-        return res;
-      }
-      )
       .subscribe((o: any) => {
         this.miseAJourStation(o);
       });
@@ -65,7 +58,7 @@ export class VcubComponent implements OnInit {
     return Observable
       .interval(60000)
       .flatMap(() => {
-        return this.getBorneData();
+        return this.getInfosStations();
       });
   }
 
@@ -78,7 +71,7 @@ export class VcubComponent implements OnInit {
         station.NBPLACES = nouvellesDonnees.CI_VCUB_P.NBPLACES;
         
   }
-  getBorneData() {
+  getInfosStations() {
     return this.vcubservice.getBorneData();
   }
 }

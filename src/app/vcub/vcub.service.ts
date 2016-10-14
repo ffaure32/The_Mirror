@@ -20,14 +20,12 @@ export class VcubService {
 
   getBorneData(){
     return this.http
-      .get(this.api_url, {
-            search: this.getParams()
-        }) 
+      .get(this.api_url, {search: this.getParams()}) 
       .map(function(res){
           var x2js = new X2JS();
           var aftCnv = x2js.xml_str2json(res.text());
           return aftCnv.FeatureCollection.featureMember;
-      });
+      }).flatMap((res: any) => {return res;});
   }
 
   getParams() {
