@@ -3,6 +3,7 @@ declare var Pusher: any;
 import {Component, Input, AfterViewChecked, OnInit, OnChanges, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {Observable}       from 'rxjs/Rx';
 import {TweetlineService} from './tweetline.service';
+import {ConstantsService} from '../constants.service';
 
 
 @Component({
@@ -10,19 +11,17 @@ import {TweetlineService} from './tweetline.service';
   encapsulation: ViewEncapsulation.None,
   templateUrl: './app/tweetline/tweetline.html',
   styleUrls: ["./app/tweetline/tweetline.css"],
-  providers: [TweetlineService]
+  providers: [TweetlineService, ConstantsService]
+  
 })
 
 
 export class TweetlineComponent implements OnInit {
   public tweets: any[] = [];
-  private hashtag: string = "#bdxio";
   private className: String;
-  private tweetlineService: TweetlineService;
   private token: any;
 
-  constructor(tweetlineService: TweetlineService) {
-    this.tweetlineService = tweetlineService;
+  constructor(private tweetlineService: TweetlineService, private constants : ConstantsService) {
   }
 
 
@@ -32,19 +31,37 @@ export class TweetlineComponent implements OnInit {
       .from(this.tweetlineService.getAuthorization())
       .subscribe((o: any) => {
         this.token = o;
-        this.getTweets(this.token);
+        this.getTweetsByInterval(this.token);
       });
   }
 
-  private getTweets(jsonResponse: any) {
+  private getTweetsByInterval(jsonResponse : any) {
+        setInterval(() => {
+      this.getTweets();
+      }, this.constants.tweets_refresh_interval);
+  }
+
+  private getTweets() {
     Observable
       .from(this.tweetlineService.getTweets(this.token))
       .map((res: any) => res)
       .flatMap((res: any) => res)
-      .subscribe((o: any) => {
-        console.log(o);
-        this.tweets.push(o);
+      .subscribe((lastTweet: any) => {
+        this.publishLastTweet(lastTweet);
       });
+  }
+
+  private publishLastTweet(lastTweet : any) {
+        var trouve = false;
+        for(var tweet of this.tweets) {
+          if(tweet.id == lastTweet.id) {
+            trouve = true;
+          }
+        }
+        if(!trouve) {
+          this.tweets = [];
+          this.tweets.push(lastTweet);
+        }
 
   }
 }

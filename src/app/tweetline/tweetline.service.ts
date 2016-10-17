@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, Jsonp, RequestOptions} from '@angular/http';
 import {ApikeyService} from './../apikey/apikey.service';
 import {Observable} from 'rxjs/Rx';
+import {ConstantsService} from '../constants.service';
 
 @Injectable()
 export class TweetlineService {
@@ -9,6 +10,7 @@ export class TweetlineService {
   public api_url: String = "https://api.twitter.com/";
   public oauth_url = "oauth2/token";
   public search_url = "1.1/search/tweets.json?q=";
+
   public http: any;
 
   public consumerkey: any;
@@ -16,7 +18,7 @@ export class TweetlineService {
   public apikeyService: any;
 
   public token: any;
-  constructor(http: Http, apikeyService: ApikeyService) {
+  constructor(http: Http, apikeyService: ApikeyService, private constants: ConstantsService) {
     this.http = http;
     this.apikeyService = apikeyService;
     this.consumerkey = this.apikeyService.getKey('twitter');
@@ -38,15 +40,12 @@ export class TweetlineService {
   }
 
   getTweets(token: any) {
-    var encsearchquery = encodeURIComponent("#bdxio");
+    var encsearchquery = encodeURIComponent(this.constants.tweets_hashtag);
     var bearerheader = 'Bearer ' + token.access_token;
     return this.http.get(this.api_url + this.search_url + encsearchquery +
-      '&result_type=recent&count=2', { headers: { Authorization: bearerheader } })
+      '&result_type=recent&count=1', { headers: { Authorization: bearerheader } })
       .map(
       function (res) {
-        console.log("res:" + res);
-        console.log("res:json" + res.json());
-        console.log("res:json:statuses" + res.json().statuses);
         return res.json().statuses;
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
