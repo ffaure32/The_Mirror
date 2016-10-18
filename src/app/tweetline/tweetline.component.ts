@@ -29,6 +29,7 @@ export class TweetlineComponent implements OnInit {
       .from(this.tweetlineService.getAuthorization())
       .subscribe((o: any) => {
         this.token = o;
+        this.getTweets(); 
         this.getTweetsByInterval(this.token);
       });
   }
