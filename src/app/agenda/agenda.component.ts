@@ -19,7 +19,9 @@ import {TimePipe} from './agenda.pipe';
 
 export class AgendaComponent implements OnInit {
   public sessions: any[] = [];
+  private sessionsToDisplay: any[] = [];
   private className: String;
+  private isToFadeOut = false;
 
   constructor(private agendaService: AgendaService, private constants : ConstantsService) {
   }
@@ -29,22 +31,31 @@ export class AgendaComponent implements OnInit {
     console.log('Init agenda');
     Observable
       .from(this.agendaService.getZenikaSessions())
-        .subscribe((lastSession: any) => {
-        this.publishLastSession(lastSession);
+        .subscribe((session: any) => {
+          console.log(session);
+          this.saveSession(session);
       });
+
+      var count : number = 0;
+      setInterval(() => {
+        this.displaySession(this.sessionsToDisplay[count]);
+        count++;
+        if(count>=this.sessionsToDisplay.length) {
+          count = 0;
+        }
+      }, this.constants.agenda_refresh_interval);
   }
 
-  private publishLastSession(lastSession : any) {
-        var trouve = false;
-        for(var session of this.sessions) {
-          if(session.id == lastSession.id) {
-            trouve = true;
-          }
-        }
-        if(!trouve) {
-          this.sessions = [];
-          this.sessions.push(lastSession);
-        }
+  private saveSession(session : any) {
+          this.sessionsToDisplay.push(session);
+  }
 
+  private displaySession(session : any) {
+    this.isToFadeOut = true;
+    setTimeout(() => {
+      this.isToFadeOut = false;
+      this.sessions = [];
+      this.sessions.push(session);
+    }, 1000);
   }
 }

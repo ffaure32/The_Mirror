@@ -17,15 +17,9 @@ export class AgendaService {
         .map(res => res.json())
         .flatMap((x) => x)
         .map((x) => x)
-        .map(function (x) {
-            console.log(x);
-            return x;
-          })
+        .map((x) => x)
          .filter(session => session["speakers"].length > 0)
-         .filter(function(session) {
-           console.log(session);
-           return session["speakers"][0].company == 'Zenika';
-         }); 
+         .filter(session => session["speakers"][0].company == 'Zenika');
   }
 
 

@@ -1,7 +1,7 @@
 agenda {
   position: fixed;
   right: 60px;
-  bottom: 240px;
+  top: 340px;
   max-width: 300;
   max-height: 200;
   text-align: right;
@@ -10,10 +10,22 @@ agenda {
     margin-bottom: 20px;
   }
 
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+
   .session{
+    animation: fadein 2s;
     margin-bottom:10px;
     img {
-      width:15px;
+      width:30px;
     }
     h2{
       color: #ea5829;
@@ -27,6 +39,10 @@ agenda {
       display: inline-block;
     }
   }
+
+  .to-fade-out{
+    animation : fadeout 2s;
+  } 
 
 }
 
