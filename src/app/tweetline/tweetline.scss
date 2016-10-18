@@ -3,7 +3,7 @@ tweetline {
   right: 60px;
   bottom: 60px;
   max-width: 300;
-  max-height: 200;
+  height: 150;
   text-align: right;
 
   h1{
@@ -11,6 +11,7 @@ tweetline {
   }
 
   .tweet{
+    animation: fadein 2s;
     margin-bottom:10px;
     img {
       width:15px;
@@ -20,6 +21,10 @@ tweetline {
       font-weight: 300;
     }
   }
+
+  .to-fade-out{
+    animation : fadeout 2s;
+  } 
 
 }
 

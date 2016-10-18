@@ -1,6 +1,6 @@
 <h1><i class="fa fa-twitter" aria-hidden="true">&nbsp;</i>bdx.io on twitter</h1>
 
-<div *ngFor="let item of tweets" class="tweet">
+<div *ngFor="let item of tweets" class="tweet" [ngClass]="{'to-fade-out': isToFadeOut }">
   <div class="user">
     <img class="user-pic" src={{item.user.profile_image_url}}>
     <span class="user-name">{{item.user.name}}</span>

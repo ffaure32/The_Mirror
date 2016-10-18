@@ -1,7 +1,6 @@
 <h1><i class="fa fa-calendar" aria-hidden="true">&nbsp;</i>Sessions Zenika</h1>
 
-<div *ngFor="let item of sessions" class="session">
-    <div [ngClass]="{'to-fade-out': isToFadeOut }">
+<div *ngFor="let item of sessions" class="session" [ngClass]="{'to-fade-out': isToFadeOut }">
     <div class="session-location">
       <p>{{item.from | formatTime}} - {{item.location.name}}</p>
     </div>
@@ -11,6 +10,5 @@
   </div>
     <div class="session-content">
       <p>{{item.title}}</p>
-    </div>
     </div>
 </div>

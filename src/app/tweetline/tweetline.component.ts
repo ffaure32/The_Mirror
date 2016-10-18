@@ -18,6 +18,7 @@ export class TweetlineComponent implements OnInit {
   public tweets: any[] = [];
   private className: String;
   private token: any;
+  private isToFadeOut = false;
 
   constructor(private tweetlineService: TweetlineService, private constants : ConstantsService) {
   }
@@ -58,8 +59,12 @@ export class TweetlineComponent implements OnInit {
           }
         }
         if(!trouve) {
-          this.tweets = [];
-          this.tweets.push(lastTweet);
+          this.isToFadeOut = true;
+          setTimeout(() => {
+            this.isToFadeOut = false;
+            this.tweets = [];
+            this.tweets.push(lastTweet);
+          }, 1000);
         }
 
   }
