@@ -1,0 +1,14 @@
+<h1>Sessions Zenika</h1>
+
+<div *ngFor="let item of sessions" class="session">
+    <div class="session-location">
+      <p>{{item.from | formatTime}} - {{item.location.name}}</p>
+    </div>
+  <div *ngFor="let speaker of item.speakers" class="speaker">
+    <img class="user-pic" src={{speaker.avatarUrl}}>
+    <span class="user-name">{{speaker.name}}</span>
+  </div>
+    <div class="session-content">
+      <p>{{item.title}}</p>
+    </div>
+</div>

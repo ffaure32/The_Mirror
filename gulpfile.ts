@@ -49,6 +49,7 @@ gulp.task("libs", () => {
             'systemjs/dist/system.src.js',
             'reflect-metadata/Reflect.js',
             'rxjs/**',
+            'moment/**',
             'zone.js/dist/**',
             '@angular/**'
         ], {cwd: "node_modules/**"}) /* Glob required here. */

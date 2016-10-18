@@ -1,5 +1,3 @@
-declare var Pusher: any;
-
 import {Component, Input, AfterViewChecked, OnInit, OnChanges, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {Observable}       from 'rxjs/Rx';
 import {TweetlineService} from './tweetline.service';

@@ -1,0 +1,20 @@
+agenda {
+  position: fixed;
+  right: 60px;
+  bottom: 240px;
+  max-width: 300;
+  max-height: 200;
+  text-align: right; }
+  agenda h1 {
+    margin-bottom: 20px; }
+  agenda .session {
+    margin-bottom: 10px; }
+    agenda .session img {
+      width: 15px; }
+    agenda .session h2 {
+      color: #ea5829;
+      font-weight: 300; }
+    agenda .session .session-location {
+      color: #ea5829; }
+    agenda .session .speaker {
+      display: inline-block; }
