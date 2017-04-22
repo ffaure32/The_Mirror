@@ -13,6 +13,6 @@ export class ConstantsService {
     this.weather_refresh_interval = 1800000;
     this.agenda_refresh_interval = 8000;
     this.tweets_refresh_interval = 10000;
-    this.tweets_hashtag = '#bdxio';
+    this.tweets_hashtag = '#zenika';
   }
 }

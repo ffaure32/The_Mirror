@@ -42,9 +42,9 @@ export class VcubService {
   }
 
   public epsg = "EPSG%3A3945";
-  public upperCornerLat = 1415127.000;
-  public upperCornerLong = 4184190.000;
-  public longueurZone = 1200;
+  public upperCornerLat = 1416345.000;
+  public upperCornerLong = 4192122.000;
+  public longueurZone = 1500;
 
   buildFilter() {
     var filter = this.addChevrons("Filter")+this.addChevrons("BBOX")+this.addChevrons("PropertyName")

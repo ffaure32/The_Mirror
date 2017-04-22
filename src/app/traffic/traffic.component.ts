@@ -28,8 +28,8 @@ export class TrafficComponent implements OnInit{
   constructor(public elementRef:ElementRef,private trafficService : TrafficService, private apikeyService : ApikeyService) {
     this.latMapCenter = 44.834741;
     this.lngMapCenter = -0.588890;
-    this.latMarker = 44.807260;
-    this.lngMarker = -0.605569;
+    this.latMarker = 44.876644;
+    this.lngMarker = -0.579885;
     this.zoom = 10;
     this.styles = [
       {"featureType":"all","elementType":"labels","stylers":[{"visibility":"off"}]},
@@ -71,8 +71,8 @@ export class TrafficComponent implements OnInit{
       var marker = new google.maps.Marker({
           position: myLatLng,
           map: this.map,
-          title: 'ENSEIRB',
-          label: 'IO'
+          title: 'ZENIKA',
+          label: 'ZBX'
       });
 
   }
