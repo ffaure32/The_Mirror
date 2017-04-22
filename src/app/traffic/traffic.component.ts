@@ -72,7 +72,7 @@ export class TrafficComponent implements OnInit{
           position: myLatLng,
           map: this.map,
           title: 'ZENIKA',
-          label: 'ZBX'
+          label: 'Z'
       });
 
   }
